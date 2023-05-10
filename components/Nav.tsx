@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import { BuiltInProviderType } from "next-auth/providers";
 
 const Nav = () => {
-  const islog = true;
+  const { data: session }: any = useSession();
 
   const [providers, setProviders] = useState<Record<
     BuiltInProviderType | string,
@@ -44,7 +44,7 @@ const Nav = () => {
       {/* desktop version */}
 
       <div className="sm:flex hidden">
-        {islog ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -60,7 +60,7 @@ const Nav = () => {
 
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session.user.image}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -88,7 +88,7 @@ const Nav = () => {
       {/* mobile navigation */}
 
       <div className="sm:hidden flex relative">
-        {islog ? (
+        {session?.user ? (
           <div className="flex">
             {" "}
             <Image
