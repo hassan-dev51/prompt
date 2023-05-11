@@ -5,12 +5,14 @@ interface User {
   username: string;
   image: string;
 }
+
 const userSchema = new mongoose.Schema<User>({
   email: {
     type: String,
     unique: [true, "Email already exists!"],
     required: [true, "Email is required!"],
   },
+
   username: {
     type: String,
     match: [
@@ -19,6 +21,7 @@ const userSchema = new mongoose.Schema<User>({
     ],
     required: [true, "Username is already required"],
   },
+
   image: {
     type: String,
   },
