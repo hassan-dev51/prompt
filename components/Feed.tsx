@@ -1,11 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
+import Loading from "@app/loading";
 
 const Feed = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [post, setPost] = useState<any[]>([]);
-
+  const [loading, setLoading] = useState(true);
   const handleSearch = () => {};
   const handleTagClick = () => {};
 
@@ -13,6 +14,7 @@ const Feed = () => {
     const response = await fetch("http://localhost:3000/api/getallprompt");
     const data = await response.json();
     setPost(data);
+    setLoading(false);
   };
   useEffect(() => {
     getPosts();
@@ -30,15 +32,20 @@ const Feed = () => {
           placeholder="Search for a tag or username..."
         />
       </form>
-      <div className="mt-16 prompt_layout">
-        {post.map((post: any) => (
-          <PromptCard
-            key={post._id}
-            post={post}
-            handleTagClick={handleTagClick}
-          />
-        ))}
-      </div>
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="mt-16 prompt_layout">
+          {post.map((post: any) => (
+            <PromptCard
+              key={post._id}
+              post={post}
+              handleTagClick={handleTagClick}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
