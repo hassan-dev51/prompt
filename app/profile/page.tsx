@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@app/loading";
 import Profile from "@components/Profile";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -7,6 +8,7 @@ import React, { useEffect, useState } from "react";
 const MyProfile = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const { data: session }: any = useSession();
+  const [loading, setloading] = useState(true);
   const router = useRouter();
   const fetchPosts = async () => {
     const response = await fetch(
@@ -14,6 +16,7 @@ const MyProfile = () => {
     );
     const result = await response.json();
     setPosts(result);
+    setloading(false);
   };
   useEffect(() => {
     if (session?.user.id) {
@@ -40,13 +43,17 @@ const MyProfile = () => {
   };
   return (
     <div>
-      <Profile
-        name="My"
-        desc="Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination"
-        data={posts}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      />
+      {loading ? (
+        <Loading />
+      ) : (
+        <Profile
+          name="My"
+          desc="Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination"
+          data={posts}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
+      )}
     </div>
   );
 };
