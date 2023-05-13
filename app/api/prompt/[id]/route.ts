@@ -1,8 +1,12 @@
 import Prompt from "@models/prompt";
 import { connectDB } from "@utils/db";
 import { NextRequest, NextResponse } from "next/server";
-
-export async function GET(req: NextRequest, { params }: any) {
+type params = {
+  params: {
+    id: string;
+  };
+};
+export async function GET(req: NextRequest, { params }: params) {
   try {
     await connectDB();
     const response = await Prompt.findById(params.id).populate("creater");
@@ -20,7 +24,7 @@ export async function GET(req: NextRequest, { params }: any) {
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: any) {
+export async function PATCH(req: NextRequest, { params }: params) {
   const { prompt, tag } = await req.json();
   try {
     await connectDB();
@@ -44,7 +48,7 @@ export async function PATCH(req: NextRequest, { params }: any) {
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: any) {
+export async function DELETE(req: NextRequest, { params }: params) {
   try {
     await connectDB();
     await Prompt.findByIdAndRemove(params.id);
