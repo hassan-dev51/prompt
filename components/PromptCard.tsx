@@ -1,6 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -19,11 +20,20 @@ const PromptCard = ({
     navigator.clipboard.writeText(post.prompt);
     setTimeout(() => setCopied(false), 3000);
   };
+
+  const profilePage = () => {
+    if (post.creater._id === session?.user.id) return router.push("/profile");
+
+    router.push(`/profile/${post.creater._id}?name=${post.creater.username}`);
+  };
   return (
     <div>
       {" "}
       <div className="prompt_card">
-        <div className="flex justify-between items-start gap-5">
+        <div
+          className="flex justify-between items-start gap-5"
+          onClick={profilePage}
+        >
           <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
             <Image
               src={post.creater?.image}
