@@ -29,7 +29,7 @@ const SingleUserProfile = ({ params }: { params: { id: string } }) => {
           <Loading />
         ) : (
           <Profile
-            name="My"
+            name={userName}
             desc={`Welcome to ${userName} personalized profile page.${userName} have Shared their exceptional prompts and inspire others with the power of your imagination`}
             data={userPost}
           />
