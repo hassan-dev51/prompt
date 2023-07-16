@@ -34,16 +34,13 @@ const EditPrompt = () => {
     setSubmitiing(true);
     if (!promptID) alert("promptID is required");
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/prompt/${promptID}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify({
-            prompt: post.prompt,
-            tag: post.tag,
-          }),
-        }
-      );
+      const response = await fetch(`/api/prompt/${promptID}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          prompt: post.prompt,
+          tag: post.tag,
+        }),
+      });
       if (response.ok) {
         router.push("/");
       }
