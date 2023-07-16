@@ -11,9 +11,7 @@ const MyProfile = () => {
   const [loading, setloading] = useState(true);
   const router = useRouter();
   const fetchPosts = async () => {
-    const response = await fetch(
-      `http://localhost:3000/api/user/${session?.user.id}/post`
-    );
+    const response = await fetch(`/api/user/${session?.user.id}/post`);
     const result = await response.json();
     setPosts(result);
     setloading(false);
