@@ -1,5 +1,4 @@
 "use client";
-import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -16,9 +15,7 @@ const EditPrompt = () => {
 
   useEffect(() => {
     const getPromptDetails = async () => {
-      const response = await fetch(
-        `http://localhost:3000/api/prompt/${promptID}`
-      );
+      const response = await fetch(`/api/prompt/${promptID}`);
 
       const data = await response.json();
       setPost({
