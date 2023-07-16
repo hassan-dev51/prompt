@@ -20,7 +20,7 @@ const CreatePrompt = () => {
     setSubmitiing(true);
 
     try {
-      const response = await fetch("http://localhost:3000/api/prompt", {
+      const response = await fetch("/api/prompt", {
         method: "POST",
         body: JSON.stringify({
           userId: session?.user.id,

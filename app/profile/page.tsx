@@ -30,7 +30,7 @@ const MyProfile = () => {
     const hasConfirm = confirm(`Are you sure you want to delete`);
     if (hasConfirm) {
       try {
-        await fetch(`http://localhost:3000/api/prompt/${post._id.toString()}`, {
+        await fetch(`/api/prompt/${post._id.toString()}`, {
           method: "DELETE",
         });
 
