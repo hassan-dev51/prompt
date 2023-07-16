@@ -1,7 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 

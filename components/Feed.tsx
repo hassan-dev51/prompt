@@ -41,8 +41,9 @@ const Feed = () => {
   };
 
   const getPosts = async () => {
-    const response = await fetch("http://localhost:3000/api/getallprompt");
+    const response = await fetch("/api/getallprompt");
     const data = await response.json();
+
     setAllPosts(data);
     setLoading(false);
   };
@@ -77,7 +78,7 @@ const Feed = () => {
         </div>
       ) : (
         <div className="mt-16 prompt_layout">
-          {allPosts.map((post: any) => (
+          {allPosts?.map((post: any) => (
             <PromptCard
               key={post._id}
               post={post}
